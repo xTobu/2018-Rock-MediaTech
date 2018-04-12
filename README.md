@@ -17,8 +17,8 @@ ___
 > <a href="https://mediatech2018.webgene.com.tw/" target="_blank">https://mediatech2018.webgene.com.tw/</a>
 
 ## APIs Documentation 
-> <a href="http://petstore.swagger.io/?url=http://swagger.webgene.com.tw/SwaggerData/2018-Rock-MediaTech.json" target="_blank">Swagger UI</a>
-
+> <a href="http://petstore.swagger.io/?url=http://swagger.webgene.com.tw/SwaggerData/2018-Rock-MediaTech.json" target="_blank">Swagger UI</a>  
+> <a href="https://app.swaggerhub.com/apis/junxiang/2018-Rock-MediaTech/1.0.0" target="_blank">SwaggerHub</a>  
 ## Source List
 
 項目                                | 資料夾
