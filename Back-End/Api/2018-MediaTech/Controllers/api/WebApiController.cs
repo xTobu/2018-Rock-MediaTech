@@ -103,6 +103,7 @@ namespace _2018_MediaTech.Controllers.api
                 {
                     Tickets_TotalAmount = 0;
                     Tickets_TotalCount = 0;
+
                     //建立一個LIST
                     List<Models.WebApi.GetModel.Table_res_Tickets> Tickets = new List<Models.WebApi.GetModel.Table_res_Tickets>();
 
