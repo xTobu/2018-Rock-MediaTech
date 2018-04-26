@@ -128,9 +128,7 @@ namespace _2018_MediaTech.Controllers.api
                     // 增加<List>到 Row
                     drPersons["Tickets"] = Tickets;
                     //drPersons["Tickets_TotalAmount"] = Tickets_TotalAmount;
-                    //drPersons["Tickets_TotalCount"] = Tickets_TotalCount;
-                    
-
+                    //drPersons["Tickets_TotalCount"] = Tickets_TotalCount;      
                 }
 
                 //200
