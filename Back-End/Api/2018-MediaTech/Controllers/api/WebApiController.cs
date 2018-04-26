@@ -103,6 +103,7 @@ namespace _2018_MediaTech.Controllers.api
                 {
                     Tickets_TotalAmount = 0;
                     Tickets_TotalCount = 0;
+
                     //建立一個LIST
                     List<Models.WebApi.GetModel.Table_res_Tickets> Tickets = new List<Models.WebApi.GetModel.Table_res_Tickets>();
 
@@ -122,7 +123,9 @@ namespace _2018_MediaTech.Controllers.api
 
                         }
                     }
+
                     //ADD LIST TO DATAROW
+                    // 增加<List>到 Row
                     drPersons["Tickets"] = Tickets;
                     //drPersons["Tickets_TotalAmount"] = Tickets_TotalAmount;
                     //drPersons["Tickets_TotalCount"] = Tickets_TotalCount;
