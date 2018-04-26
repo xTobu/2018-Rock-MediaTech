@@ -31,4 +31,3 @@ new Vue({
   components: { App }
 })
 
-// Yeah
