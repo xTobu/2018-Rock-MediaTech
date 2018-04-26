@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Google reCAPTCHA Demo</title>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <form action="POST">
+        <h3>登入</h3>
+        帳號: <input type="text" name="username" />
+        <br />
+        密碼: <input type="password" name="password" />
+        <div id="div-recaptcha"></div>
+        <button type="submit">送出</button>
+    </form>
+    <script>
+        var mygrecaptcha;
+        window.onload = () => {
+            console.log('window.onload');
+            mygrecaptcha = grecaptcha.render(
+                'div-recaptcha',
+                {
+                    'sitekey': '6LcL-FEUAAAAAP10yaSt1Xlqli_Ku2D_DQO7DYUF',
+                    'theme': 'light',
+                    'callback': () => { console.log(grecaptcha.getResponse(mygrecaptcha)) },
+                }
+            );
+        }
+    </script>
+</body>
+
+</html>
