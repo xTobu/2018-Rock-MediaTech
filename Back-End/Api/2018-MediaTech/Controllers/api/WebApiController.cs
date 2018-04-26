@@ -129,6 +129,8 @@ namespace _2018_MediaTech.Controllers.api
                     drPersons["Tickets"] = Tickets;
                     //drPersons["Tickets_TotalAmount"] = Tickets_TotalAmount;
                     //drPersons["Tickets_TotalCount"] = Tickets_TotalCount;
+                    
+
                 }
 
                 //200
