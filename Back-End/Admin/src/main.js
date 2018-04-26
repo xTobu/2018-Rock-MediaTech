@@ -1,5 +1,6 @@
 // For IE
 // npm install es6-promise -S
+// 相容至 IE8
 import 'es6-promise/auto'
 
 import Vue from 'vue'
