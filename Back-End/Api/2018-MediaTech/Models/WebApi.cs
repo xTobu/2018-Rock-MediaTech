@@ -102,8 +102,8 @@ namespace _2018_MediaTech.Models
                 {
                     var a = req.page;
                     var b = req.limit;
-                    DB.AddInParameter(se, "@start", DbType.Int16, 1 + (b * (a - 1)));
-                    DB.AddInParameter(se, "@end", DbType.Int16, a * b);
+                    DB.AddInParameter(se, "@start", DbType.Int32, 1 + (b * (a - 1)));
+                    DB.AddInParameter(se, "@end", DbType.Int32, a * b);
                     DB.AddInParameter(se, "@words", DbType.String, "%" + req.words + "%");
                     ds = DB.ExecuteDataSet(se);
 
@@ -252,10 +252,10 @@ namespace _2018_MediaTech.Models
                                     int amount = modelConfigData.TicketType[Convert.ToInt32(Ticket.type)] * Convert.ToInt32(Ticket.count);
 
                                     #region dbcmdInsertOrder
-                                    DB.AddInParameter(dbcmdInsertOrder, "@ticket_type", DbType.Int16, Ticket.type);
-                                    DB.AddInParameter(dbcmdInsertOrder, "@ticket_count", DbType.Int16, Ticket.count);
-                                    DB.AddInParameter(dbcmdInsertOrder, "@ticket_amount", DbType.Int16, amount);
-                                    DB.AddInParameter(dbcmdInsertOrder, "@person_id", DbType.Int16, person_id);
+                                    DB.AddInParameter(dbcmdInsertOrder, "@ticket_type", DbType.Int32, Ticket.type);
+                                    DB.AddInParameter(dbcmdInsertOrder, "@ticket_count", DbType.Int32, Ticket.count);
+                                    DB.AddInParameter(dbcmdInsertOrder, "@ticket_amount", DbType.Int32, amount);
+                                    DB.AddInParameter(dbcmdInsertOrder, "@person_id", DbType.Int32, person_id);
                                     DB.AddInParameter(dbcmdInsertOrder, "@person_guid", DbType.String, person_guid);
                                     DB.AddInParameter(dbcmdInsertOrder, "@CreatedTime", DbType.DateTime, modelCommon.TWtime());
                                     #endregion
@@ -277,9 +277,9 @@ namespace _2018_MediaTech.Models
                             {
                                 #region dbcmdUpdataAmount
 
-                                DB.AddInParameter(dbcmdUpdateAmount, "@tickets_amount", DbType.Int16, tickets_amount);
-                                DB.AddInParameter(dbcmdUpdateAmount, "@tickets_count", DbType.Int16, tickets_count);
-                                DB.AddInParameter(dbcmdUpdateAmount, "@id", DbType.Int16, person_id);
+                                DB.AddInParameter(dbcmdUpdateAmount, "@tickets_amount", DbType.Int32, tickets_amount);
+                                DB.AddInParameter(dbcmdUpdateAmount, "@tickets_count", DbType.Int32, tickets_count);
+                                DB.AddInParameter(dbcmdUpdateAmount, "@id", DbType.Int32, person_id);
 
                                 #endregion
 
@@ -687,8 +687,8 @@ html {
 
                             DB.AddInParameter(dbcmdUpdatePerson, "@remarks", DbType.String, req.remarks);
 
-                            DB.AddInParameter(dbcmdUpdatePerson, "@tickets_amount", DbType.Int16, req.tickets_amount);
-                            DB.AddInParameter(dbcmdUpdatePerson, "@tickets_count", DbType.Int16, req.tickets_count);
+                            DB.AddInParameter(dbcmdUpdatePerson, "@tickets_amount", DbType.Int32, req.tickets_amount);
+                            DB.AddInParameter(dbcmdUpdatePerson, "@tickets_count", DbType.Int32, req.tickets_count);
 
                             DB.AddInParameter(dbcmdUpdatePerson, "@UpdateTime", DbType.DateTime, modelCommon.TWtime());
                             DB.AddInParameter(dbcmdUpdatePerson, "@guid", DbType.String, req.guid);

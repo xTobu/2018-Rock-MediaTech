@@ -93,8 +93,8 @@ namespace _2018_MediaTech.Controllers.api
 
                 //新增Columns到dtPersons
                 dtPersons.Columns.Add("Tickets", typeof(List<Models.WebApi.GetModel.Table_res_Tickets>));
-                //dtPersons.Columns.Add("Tickets_TotalAmount", typeof(Int16));
-                //dtPersons.Columns.Add("Tickets_TotalCount", typeof(Int16));
+                //dtPersons.Columns.Add("Tickets_TotalAmount", typeof(Int32));
+                //dtPersons.Columns.Add("Tickets_TotalCount", typeof(Int32));
 
                 int Tickets_TotalAmount;
                 int Tickets_TotalCount;
