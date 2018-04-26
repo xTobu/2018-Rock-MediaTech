@@ -123,7 +123,9 @@ namespace _2018_MediaTech.Controllers.api
 
                         }
                     }
+
                     //ADD LIST TO DATAROW
+                    // 增加<List>到 Row
                     drPersons["Tickets"] = Tickets;
                     //drPersons["Tickets_TotalAmount"] = Tickets_TotalAmount;
                     //drPersons["Tickets_TotalCount"] = Tickets_TotalCount;
