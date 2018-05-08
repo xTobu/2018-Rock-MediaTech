@@ -5,7 +5,7 @@
     <div style="margin:20px 0">      
     <!-- <el-button @click="toggleSelection([list[1], list[2]])">切换第二、第三行的选中状态</el-button>
     <el-button @click="toggleSelection()">取消选择</el-button> -->
-      <a :href="`http://localhost:7164/NPOI/DownloadExcel`">    
+      <a :href="`/NPOI/DownloadExcel`">    
         <el-button>下載總表單</el-button>
       </a>
       <el-input
@@ -45,7 +45,7 @@
       align="center">
     </el-table-column> -->
 
-      <el-table-column label="公司抬頭" align="center" width="180">
+      <el-table-column label="公司抬頭" align="center" width="250">
         <template slot-scope="scope">
           <span>{{scope.row.company_name}}</span>
         </template>

@@ -16,12 +16,12 @@ namespace _2018_MediaTech.Controllers
     {
         Models.Common modelCommon = new Models.Common();
         // GET: Default
-        [HttpGet]
-        [Route("")]
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //[Route("")]
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
         [HttpGet]
         [Route("recaptcha")]
