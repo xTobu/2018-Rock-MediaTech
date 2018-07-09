@@ -27,7 +27,10 @@ namespace _2018_MediaTech.Controllers
         [Route("recaptcha")]
         public ActionResult recaptcha()
         {
-            return View();
+             string dt = DateTime.Now.ToString("yyyy-MM-dd:HH:mm:ss");
+            string d = modelCommon.TWtime().ToString("yyyy-MM-dd:HH:mm:ss");
+
+            return Content(dt+"   "+d);
         }
 
         #region NPOI

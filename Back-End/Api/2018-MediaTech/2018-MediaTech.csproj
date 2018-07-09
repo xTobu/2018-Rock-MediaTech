@@ -139,7 +139,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="test.html" />
     <Content Include="Global.asax" />
+    <Content Include="edm\images\footer.jpg" />
+    <Content Include="edm\images\header.jpg" />
+    <Content Include="edm\images\line.gif" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -163,6 +167,8 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\Default\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\正式站.pubxml" />
     <None Include="Properties\PublishProfiles\測試站 Cell.pubxml" />
     <Content Include="Views\Default\recaptcha.cshtml" />
     <None Include="Web.Debug.config">

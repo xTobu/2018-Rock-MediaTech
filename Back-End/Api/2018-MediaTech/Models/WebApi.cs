@@ -328,6 +328,11 @@ namespace _2018_MediaTech.Models
         }
         public void CheckModel_Submit_req(PostModel.Submit_req req)
         {
+            if (!modelCommon.isFinish())
+            {
+                throw modelCommon.getException("error：event was finished! "+ DateTime.Now.ToString("yyyyMMddHHmmss"), "");
+            }
+
             //檢查資料
             if (req == null)
                 throw modelCommon.getException("no request body", "");
@@ -361,6 +366,15 @@ namespace _2018_MediaTech.Models
                 throw modelCommon.getException("error：req.Tickets is not allow", "Tickets");
             }
 
+            //判斷早鳥
+            foreach (PostModel.Submit_req_Ticket ticket in req.Tickets)
+            {                                   
+                if (!modelCommon.isEarlyBird() && ticket.type == 0 && ticket.count>0)
+                {
+                    throw modelCommon.getException("error：req.Tickets is not allow", "Tickets");
+                }
+            }
+           
 
 
 
@@ -498,7 +512,7 @@ namespace _2018_MediaTech.Models
             string tickets_amount = dt.Rows[0]["tickets_amount"].ToString();
 
             MailMessage mailMessage = new MailMessage("'Media Tech' <service@media-tech.com.tw>", contactEmail);
-            mailMessage.Subject = "2018《Media Tech》報名成功通知信";
+            mailMessage.Subject = "2018《Media Tech媒體科技大會》 報名成功通知信";
             mailMessage.IsBodyHtml = true;
             mailMessage.Body = MailBody_Register(contactName, type_early, type_normal, type_student, tickets_amount);//E-mail內容
             mailMessage.BodyEncoding = System.Text.Encoding.UTF8;//E-mail編碼
@@ -524,7 +538,8 @@ namespace _2018_MediaTech.Models
         }
         public string MailBody_Register(string contactName, string type_early, string type_normal, string type_student, string tickets_amount)
         {
-            string url = "http://cell.webgene.com.tw/rockrecords/2018_MT/edm/";
+            string url = "https://mediatech2018.webgene.com.tw/edm/";
+            
             //string early = "";
             //string normal = "";
             //string student = "";
@@ -558,35 +573,27 @@ html {
                             <table border='0' cellspacing='0' cellpadding='30' style='max-width: 700px !important; width: 100% !important;'>
                                 <tr>
                                     <td bgcolor='#f8f8f8'>
-                                        <h1 style='font-size: 2em; font-family:Arial, Helvetica, sans-serif;'>2018《Media Tech》報名成功通知信</h1>
+                                        <h1 style='font-size: 1.8em; font-family:Arial, Helvetica, sans-serif;'>2018《Media Tech媒體科技大會》 報名成功通知信</h1>
                                         <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>學員您好
-                                            <br /> 感謝您的支持，特以此信告知您已報名成功，請記得於報名後5日內付款完成。
+                                            <br /> 感謝您的支持，您已報名成功，請記得於報名後5日內付款完成。
                                         </p>
                                         <p style='font-size: 1.1em; line-height: 2;  font-family:Arial, Helvetica, sans-serif; background-color: #e8e8e8; padding: 15px 25px;'>
                                             訂購人：" + contactName + @"
                                             <br> 票種數量：早鳥票 " + type_early + @" 張 / 一般票 " + type_normal + @" 張 / 學生票 " + type_student + @" 張
                                             <br> 總金額：
                                             <span style='color: #43a046;'><strong>" + Convert.ToInt32(tickets_amount).ToString("N0") + @"</strong></span>元<br>
-                                            <img src='images/line.gif' alt='' width='100%' height='41' />
-                                            <br> 銀行名稱 | 中國信託商業銀行仁愛分行
-                                            <br> 銀行帳號 | 152-11-8100203
-                                            <br> 收款帳戶地址 | 台北市仁愛路四段341號
-                                            <br> SWIFT CODE | CTCBTWTP 152
+                                            <hr/>
+                                            <br> 銀行名稱 | 華南銀行 世貿分行
+                                            <br> 銀行帳號 | 156-10-0500556
+                                            <br> 收款帳戶地址 | 110台北市信義區信義路四段458號
+                                            <br> SWIFT CODE | HNBKTWTP156
                                             <br> 收款人姓名 | 滾石文化股份有限公司
                                             <br> 收款人地址 | 台北市光復南路290巷1號6樓之1
                                             <br>
                                         </p>
-                                        <!-- <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
-                                            銀行名稱 | 中國信託商業銀行仁愛分行
-                                            <br> 銀行帳號 | 152-11-8100203
-                                            <br> 收款帳戶地址 | 台北市仁愛路四段341號
-                                            <br> SWIFT CODE | CTCBTWTP 152
-                                            <br> 收款人姓名 | 滾石文化股份有限公司
-                                            <br> 收款人地址 | 台北市光復南路290巷1號6樓之1
-                                            <br>
-                                        </p> -->
+                                       
                                         <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
-                                            我們將於活動前10日寄出入場證，再請您多加留意。<br><span style='color: #43a046;'>若於7/4(二)前未收到入場證，請立即與我們聯絡！</span>
+                                            我們將於活動前10日寄出入場證，再請您多加留意。<br><span style='color: #43a046;'>若於7/6(五)前未收到入場證之學員，請立即與我們聯絡！</span>
 
                                         </p>
                                         <h2 style=' font-family:Arial, Helvetica, sans-serif;'>活動資訊：</h2>
@@ -595,10 +602,9 @@ html {
                                             <br> 地點：台北國際會議中心 201 會議室
                                             <br> 地址：台北市信義區信義路五段 1 號 2 樓</p>
                                         <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
-                                            如有任何問題請來信 <a href='mailto:vivian.hung@rock.com.tw' style='text-decoration: underline; color: #000;'>vivian.hung@rock.com.tw</a>，或電洽請於周一至周五上班時間撥打 02-2721-6121， 分機 358，聯絡 Vivian( 洪小姐 )，大會保留議程變動之權利，如有行程異動將公布於大會官網， 並寄發 EMAIL 通知。
+                                            如有任何問題請來信 <a href='mailto:vivian.hung@rock.com.tw' style='text-decoration: underline; color: #000;'>vivian.hung@rock.com.tw</a>，或電洽請於周一至周五上班時間撥打 02-2721-6121 分機 358，聯絡 Vivian( 洪小姐 )，大會保留議程變動之權利，最新消息將公布於大會官網 <a href='www.media-tech.com.tw' target='_blank' style='text-decoration:underline; color:#000;'>www.media-tech.com.tw</a>
                                         </p>
-                                        <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
-                                            Best Regards,
+                                        <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>                                           
                                             <br>敬祝 安好
                                         </p>
                                     </td>
@@ -898,7 +904,7 @@ html {
             string contactEmail = dt.Rows[0]["contact_email"].ToString();
             string ticketsAmount = dt.Rows[0]["tickets_amount"].ToString();
             MailMessage mailMessage = new MailMessage("'Media Tech' <service@media-tech.com.tw>", contactEmail);
-            mailMessage.Subject = "2018《Media Tech》付款成功通知信";
+            mailMessage.Subject = "2018《Media Tech媒體科技大會》 付款成功通知信";
             mailMessage.IsBodyHtml = true;
             mailMessage.Body = MailBody(ticketsAmount);//E-mail內容
             mailMessage.BodyEncoding = System.Text.Encoding.UTF8;//E-mail編碼
@@ -925,7 +931,7 @@ html {
         public string MailBody(string ticketsAmount)
         {
             string body;
-            string url = "http://cell.webgene.com.tw/rockrecords/2018_MT/edm/";
+            string url = "https://mediatech2018.webgene.com.tw/edm/";
             body = @"<html xmlns='http://www.w3.org/1999/xhtml'>
 
 <head>
@@ -954,12 +960,12 @@ html {
                             <table border='0' cellspacing='0' cellpadding='30' style='max-width: 700px !important; width: 100% !important;'>
                                 <tr>
                                     <td bgcolor='#f8f8f8'>
-                                        <h1 style='font-size: 2em; font-family:Arial, Helvetica, sans-serif;'>2018《Media Tech》付款成功通知信</h1>
+                                        <h1 style='font-size: 1.8em; font-family:Arial, Helvetica, sans-serif;'>2018《Media Tech媒體科技大會》 付款成功通知信</h1>
                                         <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
                                             學員您好
                                             <br>大會已確認收到您的報名費，共<span style='color: #43a046;'> <strong>" + Convert.ToInt32(ticketsAmount).ToString("N0") + @"</strong> </span>元！
                                             <br>我們將於活動前 10 日寄出入場證，再請您多加留意，謝謝！
-                                            <br><span style='color: #43a046;'>若於 7/4( 二) 前未收到入場證，請立即與我們聯絡！</span></p>
+                                            <br><span style='color: #43a046;'>若於7/6(五)前未收到入場證之學員，請立即與我們聯絡！</span></p>
                                         <h2 style=' font-family:Arial, Helvetica, sans-serif;'>活動資訊：</h2>
                                         <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>2018 媒體科技大會（Media Tech）
                                         <br> 日期：2018 年 7 月 10 日－7 月 11 日
@@ -967,10 +973,9 @@ html {
                                         <br> 地址：台北市信義區信義路五段 1 號 2 樓</p>
                                         
                                         <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
-                                            如有任何問題請來信 <a href='mailto:vivian.hung@rock.com.tw' style='text-decoration: underline; color: #000;'>vivian.hung@rock.com.tw</a>，或電洽請於周一至周五上班時間撥打 02-2721-6121， 分機 358，聯絡 Vivian( 洪小姐 )，大會保留議程變動之權利，如有行程異動將公布於大會官網， 並寄發 EMAIL 通知。
+                                            如有任何問題請來信 <a href='mailto:vivian.hung@rock.com.tw' style='text-decoration: underline; color: #000;'>vivian.hung@rock.com.tw</a>，或電洽請於周一至周五上班時間撥打 02-2721-6121 分機 358，聯絡 Vivian( 洪小姐 )，大會保留議程變動之權利，最新消息將公布於大會官網 <a href='www.media-tech.com.tw' target='_blank' style='text-decoration:underline; color:#000;'>www.media-tech.com.tw</a>
                                         </p>
-                                        <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
-                                            Best Regards,
+                                        <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>                                          
                                             <br>敬祝 安好
                                         </p>
                                     </td>
@@ -1035,7 +1040,7 @@ html {
         public void SendEmail_Notification(string address, string guid)
         {
             MailMessage mailMessage = new MailMessage("'Media Tech' <service@media-tech.com.tw>", address);
-            mailMessage.Subject = "2018《Media Tech》報到通知信";
+            mailMessage.Subject = "2018《Media Tech媒體科技大會》 報到通知信";
             mailMessage.IsBodyHtml = true;
             mailMessage.Body = MailBody_Notification(guid);//E-mail內容
             mailMessage.BodyEncoding = System.Text.Encoding.UTF8;//E-mail編碼
@@ -1061,7 +1066,7 @@ html {
         }
         public string MailBody_Notification(string guid)
         {
-            string url = "http://cell.webgene.com.tw/rockrecords/2018_MT/edm/";
+            string url = "https://mediatech2018.webgene.com.tw/edm/";
 
             string body;
             body = @"<html xmlns='http://www.w3.org/1999/xhtml'>
@@ -1090,13 +1095,13 @@ html {
                     <tr>
                         <td align='center'>
                             <table border='0' cellspacing='0' cellpadding='30' style='max-width: 700px !important; width: 100% !important;'>
-                                <tr>
+                                <tr>報名成功通知信
                                     <td bgcolor='#f8f8f8'>
-                                        <h1 style='font-size: 2em; font-family:Arial, Helvetica, sans-serif;'>2018《Media Tech》報到通知信</h1>
+                                        <h1 style='font-size: 1.8em; font-family:Arial, Helvetica, sans-serif;'>2018《Media Tech媒體科技大會》 報到通知信</h1>
                                         <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>學員您好<br />
-                                        再次感謝您報名2018《Media Tech》。</p><p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>大會將於7月10日（二）早上9點00分憑公司名片進行報到。<br>
+                                        再次感謝您報名2018《Media Tech媒體科技大會》 。</p><p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>大會將於7月10日（二）早上8點30分<span style='color: #43a046;'> <strong>憑入場證</strong> </span>進行報到，並領取活動資料袋，現領一份。<br>
 （若您是公司企業負責報名窗口，請協助告知參加學員）<span style='color: #43a046;'><br />
-若於 7/4( 二) 前未收到入場證，請立即與我們聯絡！</span></p>
+若於7/6(五)前未收到入場證之學員，請立即與我們聯絡！</span></p>
                                         <h2 style=' font-family:Arial, Helvetica, sans-serif;'>活動資訊：</h2>
                                         <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>2018 媒體科技大會（Media Tech）
                                         <br> 日期：2018 年 7 月 10 日－7 月 11 日
@@ -1106,14 +1111,15 @@ html {
                                         <h2 style=' font-family:Arial, Helvetica, sans-serif;'>重要提醒：</h2>
                                         <ul style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
                                         <li><span style='color: #43a046;'>活動當日敬請記得攜帶入場證，本單位恕不補發。</span></li>
-<li>本活動演講場次大部分皆有翻譯，僅部分場次全程使用英語。</li>
-<li>場內禁止攜帶外食、飲料，請於場外食用完畢。</li>
+<li>本活動英語演講場次備有翻譯人員，提供逐步翻譯和Q&A翻譯的協助。</li>
 <li>本活動不提供中餐，需請學員自理。</li>
 <li>主辦單位保有大會所有活動變更之權利。</li>
-<li>任何大會相關最新訊息請上官方網站 (<a href='http://www.mediatech.com.tw' target='_blank' style='text-decoration:underline; color:#000;'>http://www.mediatech.com.tw</a>) 查看。</li>
+<li>最新消息將公布於大會官網 <a href='www.media-tech.com.tw' target='_blank' style='text-decoration:underline; color:#000;'>www.media-tech.com.tw</a></li>
                                         </ul>
-                                      <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
-                                            Best Regards,
+                                        <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>
+                                            如有任何問題請來信 <a href='mailto:vivian.hung@rock.com.tw' style='text-decoration: underline; color: #000;'>vivian.hung@rock.com.tw</a>，或電洽請於周一至周五上班時間撥打 02-2721-6121 分機 358，聯絡 Vivian( 洪小姐 )，大會保留議程變動之權利，最新消息將公布於大會官網 <a href='www.media-tech.com.tw' target='_blank' style='text-decoration:underline; color:#000;'>www.media-tech.com.tw</a>
+                                        </p>
+                                      <p style='font-size: 1.3em; line-height: 2;  font-family:Arial, Helvetica, sans-serif;'>                                            
                                             <br>敬祝 安好
                                         </p>
                                     </td>

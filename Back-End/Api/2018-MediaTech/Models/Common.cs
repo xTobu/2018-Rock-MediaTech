@@ -49,6 +49,43 @@ namespace _2018_MediaTech.Models
             e.Data["Field"] = field;
             return e;
         }
+        public bool isEarlyBird()
+        {
+            bool res;
+            DateTime today = TWtime();
+            DateTime EarlyBird = new DateTime(2018, 6, 9, 0, 0, 0);
+            int result = DateTime.Compare(today, EarlyBird);
+            if(result < 0)
+            {
+                //小於早鳥期限
+                res = true;
+            }
+            else
+            {
+                //大於早鳥期限
+                res = false;
+            }
+            return res;
+        }
+
+        public bool isFinish()
+        {
+            bool res;
+            DateTime today = TWtime();
+            DateTime Finish = new DateTime(2018, 7, 4, 23, 59, 59);
+            int result = DateTime.Compare(today, Finish);
+            if (result < 0)
+            {
+                //小於結束期限
+                res = true;
+            }
+            else
+            {
+                //大於結束期限
+                res = false;
+            }
+            return res;
+        }
     }
 
 }

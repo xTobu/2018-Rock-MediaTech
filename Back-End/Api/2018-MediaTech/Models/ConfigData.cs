@@ -12,12 +12,12 @@ namespace _2018_MediaTech.Models
         /// </summary>
         public Dictionary<int, int> TicketType = new Dictionary<int, int>
         {
-            // 早鳥
+            // 早鳥 
             {0,6000},
             // 一般
             {1,8000},
             // 學生
-            {2,1000}
+            {2,2000} 
         };
     }
 }

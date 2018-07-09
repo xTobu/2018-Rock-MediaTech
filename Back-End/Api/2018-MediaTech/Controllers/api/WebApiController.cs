@@ -345,8 +345,9 @@ namespace _2018_MediaTech.Controllers.api
                     return BadRequest();
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return BadRequest();
             }
         }
