@@ -15,6 +15,7 @@ namespace _2018_MediaTech.Controllers
     public class DefaultController : Controller
     {
         Models.Common modelCommon = new Models.Common();
+        Database DB = new Models.WebApi().DB;
         // GET: Default
         //[HttpGet]
         //[Route("")]
@@ -27,10 +28,11 @@ namespace _2018_MediaTech.Controllers
         [Route("recaptcha")]
         public ActionResult recaptcha()
         {
-             string dt = DateTime.Now.ToString("yyyy-MM-dd:HH:mm:ss");
-            string d = modelCommon.TWtime().ToString("yyyy-MM-dd:HH:mm:ss");
+            string domain = new Models.WebApi().UserDomainName;
+            string dt = DateTime.Now.ToString("yyyy-MM-dd:HH:mm:ss");
+            string d = modelCommon.TWtime().ToString("yyyy-MM-dd:HH:mm:ss") + domain;
 
-            return Content(dt+"   "+d);
+            return Content(dt + "   " + d);
         }
 
         #region NPOI
@@ -38,7 +40,7 @@ namespace _2018_MediaTech.Controllers
         [Route("NPOI/DownloadExcel")]
         public ActionResult NPOIDownloadExcel()
         {
-            Database DB = new DatabaseProviderFactory().Create("Rock_2018_ConnectionString");
+            //Database DB = new DatabaseProviderFactory().Create("Rock_2018_ConnectionString");
             Models.WebApi WebApi = new Models.WebApi();
             Models.NPOI NPOI = new Models.NPOI();
             //Models.WebApi.GetModel.Persons_req req = new Models.WebApi.GetModel.Persons_req();

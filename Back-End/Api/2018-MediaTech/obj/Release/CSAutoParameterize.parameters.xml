@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="Rock_2018_ConnectionString-Web.config Connection String" description="Rock_2018_ConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Server=211.78.85.202;Database=rock2018_db;User ID=rock2018_db;Password=VPd2aB7C;Connection Timeout=300" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="F:\\Projects\\GitLab\\2018-Rock-MediaTech\\Back-End\\Api\\2018-MediaTech\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Rock_2018_ConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="WebGeneDB_ConnectionString-Web.config Connection String" description="WebGeneDB_ConnectionString 應用程式在 web.config 中用來存取資料庫的連接字串。" defaultValue="Server=118.163.33.123 ;Database=rock2018_db;User ID=sa;Password=Curbkt7qe3@#;Connection Timeout=300" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="F:\\Projects\\GitLab\\2018-Rock-MediaTech\\Back-End\\Api\\2018-MediaTech\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='WebGeneDB_ConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

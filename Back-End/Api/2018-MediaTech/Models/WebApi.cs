@@ -19,7 +19,11 @@ namespace _2018_MediaTech.Models
     {
         Common modelCommon = new Common();
         ConfigData modelConfigData = new ConfigData();
-        Database DB = new DatabaseProviderFactory().Create("Rock_2018_ConnectionString");
+        public string UserDomainName = System.Environment.UserDomainName;
+
+        //public Database DB = new DatabaseProviderFactory().Create("Rock_2018_ConnectionString");
+        public Database DB = new DatabaseProviderFactory().Create("WebGeneDB_ConnectionString");
+
 
         //Get DataSet TableData
         #region Route Persons
@@ -330,7 +334,7 @@ namespace _2018_MediaTech.Models
         {
             if (!modelCommon.isFinish())
             {
-                throw modelCommon.getException("error：event was finished! "+ DateTime.Now.ToString("yyyyMMddHHmmss"), "");
+                throw modelCommon.getException("error：event was finished! " + DateTime.Now.ToString("yyyyMMddHHmmss"), "");
             }
 
             //檢查資料
@@ -368,13 +372,13 @@ namespace _2018_MediaTech.Models
 
             //判斷早鳥
             foreach (PostModel.Submit_req_Ticket ticket in req.Tickets)
-            {                                   
-                if (!modelCommon.isEarlyBird() && ticket.type == 0 && ticket.count>0)
+            {
+                if (!modelCommon.isEarlyBird() && ticket.type == 0 && ticket.count > 0)
                 {
                     throw modelCommon.getException("error：req.Tickets is not allow", "Tickets");
                 }
             }
-           
+
 
 
 
@@ -539,7 +543,7 @@ namespace _2018_MediaTech.Models
         public string MailBody_Register(string contactName, string type_early, string type_normal, string type_student, string tickets_amount)
         {
             string url = "https://mediatech2018.webgene.com.tw/edm/";
-            
+
             //string early = "";
             //string normal = "";
             //string student = "";

@@ -23,8 +23,11 @@ namespace _2018_MediaTech.Controllers.api
     [RoutePrefix("api")]
     public class WebApiController : ApiController
     {
-        Database DB = new DatabaseProviderFactory().Create("Rock_2018_ConnectionString");
+        //Database DB = new DatabaseProviderFactory().Create("Rock_2018_ConnectionString");
+        
+
         Models.WebApi WebApi = new Models.WebApi();
+        Database DB = new Models.WebApi().DB;
 
         #region Example
 
@@ -479,7 +482,7 @@ namespace _2018_MediaTech.Controllers.api
         [Route("DownloadExcel")]
         public HttpResponseMessage DownloadExcel()
         {
-            Database DB = new DatabaseProviderFactory().Create("Rock_2018_ConnectionString");
+            //Database DB = new DatabaseProviderFactory().Create("Rock_2018_ConnectionString");
             Models.WebApi WebApi = new Models.WebApi();
             Models.NPOI NPOI = new Models.NPOI();
             Models.WebApi.GetModel.Persons_req req = new Models.WebApi.GetModel.Persons_req();
