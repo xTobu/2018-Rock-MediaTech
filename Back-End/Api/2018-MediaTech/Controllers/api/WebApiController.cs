@@ -334,7 +334,7 @@ namespace _2018_MediaTech.Controllers.api
                 bool isUsernamePasswordValid = false;
 
                 if (login != null)
-                    isUsernamePasswordValid = (req.Username == "admin" && req.Password == "webgene") ? true : false;
+                    isUsernamePasswordValid = (req.Username == "admin" && req.Password == "mediatech") ? true : false;
                 // if credentials are valid
                 if (isUsernamePasswordValid)
                 {
